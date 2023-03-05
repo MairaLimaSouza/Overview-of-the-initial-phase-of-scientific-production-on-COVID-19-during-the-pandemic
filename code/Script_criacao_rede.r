@@ -789,6 +789,22 @@ end_time - start_time
 
 #importando o cod_prod dos dois existentes no dataset do vocabulario de controle de doi's
 
+#DataCitacaovc<-as.data.frame(matrix(,ncol=0,nrow=0)) 
+DataCitacaovc<-data.frame( # dataset que terá a lista de autores com nome tratado (abreviado) e será a base para a criacao da rede co-autoria
+                 COD_PROD=character(),
+                 AUTHOR=list(),
+                 DOI=character(),          
+                 stringsAsFactors=FALSE) 
+
+for (j in 1:nrow(data_v2)){
+     
+    DataCitacaovc[j,"COD_PROD"]<-data_v2[j,"NEWCOD_PROD"]
+    DataCitacaovc[j,"AUTHOR"]<-data_v2[j,"Authors"]
+    DataCitacaovc[j,"DOI"]<-trim.leading(as.character(data_v2[j,'Digital.Object.Identifier..DOI.']))
+       
+}
+
+
 #####################################
 # faco merge para inserir as obras no vocabulario de controle DataCitacaoVc
 # data_var_select_v2 resulta do merge entre data_var_select e DataCitacaovc
