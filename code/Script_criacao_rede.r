@@ -1,3 +1,6 @@
+install.packages(c("data.table","tidyverse","tibble","stringr","sjmisc","readxl",
+                   "openxlsx","dplyr","Xmisc","rapportools","abjutils","gtools","bibliometrix", "regexPipes"))
+
 # bibliotecas para manipular base de dados
 library(data.table)
 library(tidyverse)
@@ -15,10 +18,8 @@ library(dplyr)
 # bibiloteca para manipular dados e executa comandos is.empty, is.character, is.number, etc
 require(rapportools)
 
-#install.packages("Xmisc")
 require(Xmisc)
-
-#install.packages("abjutils")
+library(regexPipes)
 require(abjutils)
 
 # chamada dos pacotes/bibliotecas para realizar analise combinatoria.
@@ -66,15 +67,13 @@ Data_excluidos<-subset(data,(is.empty(Authors)|Authors=='[Anonymous]'))
 
 #as obras excluidas foram salvas no dataset DataAutoresObra_excluidos
 #08 obras foram excluidas
-Data_excluidos
+
 
 #novo dataset sem os autores com nome em branco é criado
 data_v2<-subset(data,!is.empty(Authors))
 
 #novo dataset sem os autores com nome anonimo
 data_v2<-subset(data_v2,Authors!='[Anonymous]')
-
-dim(data_v2)
 
 # Criando nova versao do dado original.
 # Novas linhas. 1749 linhas.
@@ -97,12 +96,12 @@ data_v2$Digital.Object.Identifier..DOI.<-data_v2$Digital.Object.Identifier..DOI.
 # faço uma selecao para idenitificar se ha mais de uma ocorrencia de um mesmo DOI
 # exibido o resultado
 df<- data_v2%>%group_by(Digital.Object.Identifier..DOI.) %>%count(Digital.Object.Identifier..DOI.)%>% ungroup()%>%filter(n>1) # seleciono as obras duplicadas
-df
+
 
 lista<-df$Digital.Object.Identifier..DOI. # crio lista de DOI's duplicados
-listadrop<-c("1")
+listadrop<-c("1") # ou listadrop<-c("10") # caso a posição da linha em branco esteja na primeira celula
 lista<-lista[-as.integer(listadrop)] # excluo os casos em que DOI está vazio
-lista
+
 
 # armazeno as linhas que contêm o mesmo DOI
 # mantem no dataset original apenas a primeira ocorrencia do DOI, deletando as demais.
@@ -512,7 +511,7 @@ for (j in 1:nrow(data_v2)){
 }#fecha o loop (for) que percorre o df
 
 
-} 
+
 
 #https://stackoverflow.com/questions/11095992/generating-all-distinct-permutations-of-a-list-in-r?noredirect=1&lq=1
 #https://davetang.org/muse/2013/09/09/combinations-and-permutations-in-r/ (melhor solucao, usei a fc de combinacao. A fc de permutacao gera repetiçoes)
