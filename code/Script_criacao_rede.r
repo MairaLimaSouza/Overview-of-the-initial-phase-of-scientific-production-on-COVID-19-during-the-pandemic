@@ -877,7 +877,7 @@ for (j in seq(1,nrow(data_var_select_v2),1)){ #percorro data_var_select
         
       DataCitacaovc[tam,"COD_PROD"]<-str_c("PROD_00",tam)
       DataCitacaovc[tam,"AUTHOR"]<-data_var_select_v2[j,"AUTHOR.x"]
-      DataCitacaovc[tam,"ANO"]<-data_var_select_v2[j,"ANO.x"]
+      DataCitacaovc[tam,"ANO"]<-data_var_select_v2[j,"ANO"]
       DataCitacaovc[tam,"DOI"]<-data_var_select_v2[j,"DOI"]
       data_var_select_v2[j,"COD_PROD"]<-str_c("PROD_00",tam) # coloco o codigo novo gerado para o DataCitacaovc
        
