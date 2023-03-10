@@ -1,5 +1,7 @@
 # Overview-of-the-initial-phase-of-scientific-production-on-COVID-19-during-the-pandemic
 This repo contains the raw database and all material produced used in the article "Overview of the initial phase of scientific production on COVID-19 during the pandemic".
+
+
 +-----------------------------------------------------------------------------------------------+
 | File: README.txt                                                                              |
 |                                                                                               |
